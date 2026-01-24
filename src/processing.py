@@ -9,13 +9,12 @@ from typing import Optional
 
 def filter_by_state(operations_list: List[Dict[str, Any]], state: Optional[str] = "EXECUTED") -> List[Dict[str, Any]]:
     """Фильтрует словари операции из списка по заданному состоянию."""
-
-    filtred_operations_list = []
+    filtered_operations_list = []
     for operation in operations_list:
         if operation.get("state") == state:
-            filtred_operations_list.append(operation)
+            filtered_operations_list.append(operation)
 
-    return filtred_operations_list
+    return filtered_operations_list
 
 
 # # Пример функции:
@@ -37,9 +36,8 @@ def filter_by_state(operations_list: List[Dict[str, Any]], state: Optional[str] 
 # print(filter_by_state(data, 'CANCELED'))
 
 
-def sort_by_date(operations_list: List[Dict[str, Any]], reverse: Optional[bool] = True) -> List[Dict[str, Any]]:
+def sort_by_date(operations_list: List[Dict[str, Any]], reverse: bool = True) -> List[Dict[str, Any]]:
     """Сортирует список словарей операций по дате."""
-
     sorted_list = sorted(operations_list, key=lambda x: datetime.fromisoformat(x["date"]), reverse=reverse)
     return sorted_list
 
@@ -53,7 +51,7 @@ def sort_by_date(operations_list: List[Dict[str, Any]], reverse: Optional[bool] 
 #     {'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'}]
 #
 # print("\nОтсортированные по убыванию:")
-# sorted_descending = sort_by_date(data)
+# sorted_descending = sort_by_date(data, False)
 # print(sorted_descending)
 #
 # print("\nОтсортированные по возрастанию:")
