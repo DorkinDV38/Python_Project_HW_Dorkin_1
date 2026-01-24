@@ -19,7 +19,7 @@ def get_mask_card_number(card_number: Union[str, int]) -> str:
 
 def get_mask_account(account: Union[str, int]) -> str:
     """Функция принимает на вход номер счета и возвращает его маску вида **XXXX"""
-    if len(account) < 4:
+    if len(str(account)) < 4:
         raise ValueError("Номер счета должен содержать хотя бы 4 цифры.")
     masked_account = "**" + str(account)[-4:]
     return masked_account
