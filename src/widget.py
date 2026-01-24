@@ -21,10 +21,10 @@ def mask_account_card(card_or_account: Union[str, int]) -> str:
     # Через условный оператор в зависимости от длины номера маскируем как номер карты или номер счета
     if len(card_account_number) == 16:
         masked_card_account = str(card_or_account)[0:-16] + get_mask_card_number(card_account_number)
-    elif len(card_account_number) == 20:
+    elif len(card_account_number) == 20 and (parts[0].lower() == "счет" or parts[0].lower() == "счёт"):
         masked_card_account = str(card_or_account)[0:-20] + get_mask_account(card_account_number)
     else:
-        masked_card_account = str(card_or_account)
+        raise ValueError("Invalid input type")
 
     return masked_card_account
 
@@ -41,13 +41,24 @@ def get_date(date_string: str) -> str:
     return formatted_date
 
 
+# asd ="Счёт 11111222223333345678"
+#
+# parts1 = str(asd).split()
+# print(parts1[0].lower())
+# print(len(parts1[1]))
+#
+# if len(parts1[1]) == 20 and (parts1[0].lower() == "счет" or parts1[0].lower() == "счёт"):
+#     print('Условие верно')
+#
+# print(mask_account_card(asd))
+
 # input_date = "2024-03-11T02:26:18.671407"
 # formatted_date = get_date(input_date)
 # print(formatted_date)  # Выведет: 11.03.2024
 #
-# input_date = "2024-03-11"
+# input_date = "2026-02-28"
 # formatted_date = get_date(input_date)
-# print(formatted_date)  # Выведет: 11.03.2024
+# print(formatted_date)  # Выведет: 28.02.2026
 #
 #
 # print(mask_account_card("Maestro 1596837868705199"))
@@ -57,4 +68,3 @@ def get_date(date_string: str) -> str:
 # print(mask_account_card("Visa Classic 6831982476737658"))
 # print(mask_account_card("Visa Platinum 8990922113665229"))
 # print(mask_account_card("Visa Gold 5999414228426353"))
-# print(mask_account_card("Счет 73654108430135874305"))
